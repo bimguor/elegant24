@@ -9,6 +9,7 @@ public class Main {
     static boolean solutionFound = false;
     static boolean done = false;
     public static void main(String[] args) {
+
         parse(args);
         steps = new Step[origInputs.length - 1];
         for (int i = 0; i < steps.length; i++) {
@@ -18,6 +19,7 @@ public class Main {
         if (!solutionFound) {
             System.out.println("SOLUTION NOT FOUND :/\n");
         }
+        checkNumbers();
     }
     private static void solve(double[] inputs) {
         if (done) return;
@@ -28,7 +30,6 @@ public class Main {
                 print();
                 done = true;
             }
-            return;
         } else {
             for (int i = 0; i < inputs.length - 1; i++) {
                 for (int j = i + 1; j < inputs.length; j++) {
@@ -113,6 +114,25 @@ public class Main {
             num1 = 0;
             num2 = 0;
             op = 0;
+        }
+    }
+    private static boolean solve(int a, int b, int c, int d) {
+        return true;
+    }
+    private static void checkNumbers() {
+        int a, b, c, d;
+        int unsolvable = 0;
+        for (a=1; a < 14; a++) {
+            for (b=1; b<14; b++) {
+                for (c=1; c<14; c++) {
+                    for (d=1; d<14; d++) {
+                        if (!solve(a, b, c, d)) {
+                            unsolvable++;
+                            System.out.printf("The numbers, %d, %d, %d, %d don't work.\n", a, b, c, d);
+                        }
+                    }
+                }
+            }
         }
     }
 }
