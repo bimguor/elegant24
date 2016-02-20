@@ -7,7 +7,6 @@ public class Main {
     static Step[] steps;
     static char[] ops = {'+', '-', '*', '/'};
     static boolean solutionFound = false;
-    static boolean done = false;
     public static void main(String[] args) {
 
         parse(args);
@@ -19,16 +18,17 @@ public class Main {
         if (!solutionFound) {
             System.out.println("SOLUTION NOT FOUND :/\n");
         }
+
+        //now check all numbers
         checkNumbers();
     }
     private static void solve(double[] inputs) {
-        if (done) return;
+        if (solutionFound) return;
         int stepCount = origInputs.length - inputs.length;
         if (inputs.length == 1) {
             if (inputs[0] == result) {
                 solutionFound = true;
                 print();
-                done = true;
             }
         } else {
             for (int i = 0; i < inputs.length - 1; i++) {
@@ -117,7 +117,14 @@ public class Main {
         }
     }
     private static boolean solve(int a, int b, int c, int d) {
-        return true;
+        double[] inputs = new double[4];
+        inputs[0] = a;
+        inputs[1] = b;
+        inputs[2] = c;
+        inputs[3] = d;
+        solutionFound = false;
+        solve(inputs);
+        return solutionFound;
     }
     private static void checkNumbers() {
         int a, b, c, d;
@@ -134,6 +141,10 @@ public class Main {
                 }
             }
         }
+        int allCount = 13 * 13 * 13 * 13;
+
+        System.out.printf("There are %d unsolvable, which is %f%% out of %d all possible sets\n", unsolvable,
+                ((double)unsolvable/(double)allCount * (double)100), allCount);
     }
 }
 
